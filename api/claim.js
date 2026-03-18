@@ -3,13 +3,13 @@ export default async function handler(req, res) {
     return res.status(200).json({
       type: "action",
       icon: "https://placehold.co/200x200",
-      title: "TEFT Experiment",
-      description: "Do not tell anyone what happens.",
-      label: "Enter experiment",
+      title: "Do NOT click this.",
+      description: "",
+      label: "Enter",
       links: {
         actions: [
           {
-            label: "Enter experiment",
+            label: "Enter",
             href: "/api/claim?step=1"
           }
         ]
@@ -24,18 +24,14 @@ export default async function handler(req, res) {
       return res.status(200).json({
         type: "action",
         icon: "https://placehold.co/200x200",
-        title: "TEFT Experiment",
-        description: "most people ignore this",
+        title: "Most people leave here.",
+        description: "",
         label: "Continue",
         links: {
           actions: [
             {
               label: "Continue",
               href: "/api/claim?step=2"
-            },
-            {
-              label: "Leave",
-              href: "/api/claim?step=leave"
             }
           ]
         }
@@ -44,23 +40,30 @@ export default async function handler(req, res) {
 
     if (step === "2") {
       return res.status(200).json({
-        type: "completed",
+        type: "action",
         icon: "https://placehold.co/200x200",
-        title: "TEFT Experiment",
-        description: "You were not supposed to stay this long.",
-        label: "Observed",
-        message: "most people click once and leave."
+        title: "You stayed.",
+        description: "That was not expected.",
+        label: "Reveal",
+        links: {
+          actions: [
+            {
+              label: "Reveal",
+              href: "/api/claim?step=3"
+            }
+          ]
+        }
       });
     }
 
-    if (step === "leave") {
+    if (step === "3") {
       return res.status(200).json({
         type: "completed",
         icon: "https://placehold.co/200x200",
-        title: "TEFT Experiment",
-        description: "most people ignore this",
-        label: "Left",
-        message: "You did what most people do."
+        title: "You passed.",
+        description: "Most people fail this.",
+        label: "Done",
+        message: "Send this to someone who wouldn’t."
       });
     }
   }
